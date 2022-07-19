@@ -1,0 +1,44 @@
+.container {
+  background-color: var(--VeryLightGray);
+  min-height: 100vh;
+  margin-bottom: 20px;
+}
+
+/* grid */
+
+.countries__grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(270px,1fr));
+  grid-gap: 1.5rem;
+  padding: 0 2.5rem;
+  list-style: none;
+}
+@media screen and (max-width:1200px) {
+  .countries__grid{
+      grid-template-columns: repeat(3, minmax(270px,1fr));
+
+
+
+  }
+}
+@media screen and (max-width:900px) {
+  .countries__grid{
+      grid-template-columns: repeat(2, minmax(270px,1fr));
+
+
+
+  }
+}
+@media screen and (max-width:650px) {
+  .countries__grid{
+      grid-template-columns: repeat(auto-fit, minmax(270px,1fr));
+      grid-gap: .5rem;
+      padding: 0 .5rem;
+
+  }
+}
+
+
+
+/* grid */
+

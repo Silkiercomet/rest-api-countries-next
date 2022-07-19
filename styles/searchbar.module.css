@@ -1,0 +1,81 @@
+.menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 2.5rem;
+    margin: 0;
+
+    list-style: none;
+}
+
+.menu__input, .menu__select{
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    padding: .5rem 2rem;
+
+
+    box-shadow:
+    1.5px 0.7px 1.5px rgba(0, 0, 0, 0.02),
+    3.7px 1.7px 3.7px rgba(0, 0, 0, 0.028),
+    6.9px 3.1px 6.9px rgba(0, 0, 0, 0.035),
+    12.3px 5.6px 12.3px rgba(0, 0, 0, 0.042),
+    23px 10.4px 23px rgba(0, 0, 0, 0.05),
+    55px 25px 55px rgba(0, 0, 0, 0.07)
+    ;
+    border-radius: 3px;
+
+    font-family: inherit;
+}
+
+.menu__input input{
+    padding: .3rem 1.5rem;
+    
+    border: none;
+}
+
+.menu__select{
+    padding: .5rem ;
+    cursor: pointer;
+    
+}
+.menu__select select{
+    padding:.3rem .5rem ;
+    border: none;
+
+    font-family: inherit;
+    cursor: pointer;
+    font-weight: 600;
+}
+.menu__select select option{
+    margin:.3rem 0 ;
+    border: none;
+
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+@media screen and (max-width:640px) {
+    .menu{
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 1.2rem;
+        padding: 1rem 2rem;
+        margin: 0;
+    
+        list-style: none;
+    }
+    .menu__input{
+        width: 100%;
+    }
+    .menu__input input{
+        padding: .3rem 1.5rem;
+        width: 100%;
+        border: none;
+    }
+}
