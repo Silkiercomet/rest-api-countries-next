@@ -1,28 +1,32 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from 'next/router'
 import Head from "next/head";
 import styles from "../../styles/country.module.css"
 import Link from "next/link"
 import {AiOutlineArrowLeft} from "react-icons/ai"
 import Loader from "../../components/Loader/Loader";
+
 const Country = (props) => {
-  console.log(props.info)
-  const [country] = useState(props.info[0]) 
+ // console.log(props.borderInfo.map(border => border.cca3))
+  const [country, setCountry] = useState(props.info[0]) 
+
+  const router = useRouter()
+
 
     const officialName = country?.name?.official
     const officialCurrencie = country?.currencies[Object?.keys(country.currencies)[0]]
     const officialLanguages = Object?.values(country?.languages)
     const capital = country?.capital === undefined? "none" : country?.capital[0]
 
-    // const handleClick = (e) => {
-    //   let newCountry = countries.filter(country => country.cca3 === e)
-    //   //setDisplay(newCountry)
-    // } 
-    // const handleName = (e) => {
-    //   let newCountry = countries.filter(country => country.cca3 === e)
-    //   return newCountry[0].name.common
-    // } 
-  
-   // const borders = !country.borders ? "no borders" : country.borders.map(border => <button className={ `light-bg-element ${styles.country__btn_border}`} key={border} onClick={()=>handleClick(border)}>{handleName(border)}</button>)
+    const handleClick = (e) => {
+      router.push(e)
+
+    } 
+
+    useEffect(() => {
+      setCountry(props.info[0])
+    })
+    const borders = !country.borders ? "no borders" : props.borderInfo.map(border => <button className={ `light-bg-element ${styles.btnborder}`} key={border.cca3} onClick={() => handleClick(border.name.common.replaceAll(" ", "-"))}>{border.cca3}</button>)
   if(props.info){
     return (
       <main className={styles.country__container}>
@@ -54,6 +58,7 @@ const Country = (props) => {
           </div>
           <div className={styles.border__container}>
            <span className={styles.bold}>Border Countries</span>
+            <span className={styles.borders__container}>{borders}</span>
           </div>
           </article>
         </section>
@@ -72,24 +77,20 @@ const getAllCountries = async (header = "all") => {
 }
 /* encontrar y pasar como prop los nombres de los paises que comparten fronteras */
 export async function getStaticProps(context) {
-  const country = context.params.country.split("-")
-  if(country.length === 1){
-    const data = await getAllCountries(`name/${country}`)
-  
-    return {
-      props: {
-        info: data
-      }
-    }
-  } 
 
   const data = await getAllCountries()
   const fullName = context.params.country.replaceAll("-", " ")
   const match = data.filter(e => e.name.common.includes(fullName) === true )
-
+  const borders = match[0].borders
+  const borderCountryName = data.filter(e => {
+    if(borders.includes(e.cca3)){
+      return {cca3: e.cca3, name : e.name.common}
+    }
+  })
   return {
     props: {
-      info: match
+      info: match,
+      borderInfo: borderCountryName
     }
   }
 }

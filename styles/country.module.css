@@ -70,7 +70,33 @@
     row-gap: .4rem;
 }
 .border__container{
-    margin-top: 1rem;
+    margin-top: 16px;
+}
+.borders__container{
+    display: inline-block;
+    margin-left: 5px;
+
+}
+.borders__container > *{
+
+    background-color: white;
+    margin: 0 5px;
+    cursor: pointer;
+    
+}
+.btnborder{
+
+    border: none;
+    padding: .2rem 1rem;
+    margin:.2rem ;
+
+    font-family: inherit;
+    font-weight: 600;
+
+    color:inherit;
+    box-shadow: 0 0 1em rgba(0, 0, 0, .3 );
+    border-radius: 3px;
+    cursor: pointer;
 }
 @media screen and (max-width:650px) {
     .country__content{

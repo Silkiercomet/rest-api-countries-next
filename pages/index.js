@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
-import CountryContext from '../context/CountryContext'
+import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import SearchBar from '../components/SearchBar/SearchBar'
 import Card from '../components/Card/Card'
@@ -8,19 +7,18 @@ import Loader from '../components/Loader/Loader'
 /*cambiar el contexto por solo usar el props, y filtrar el pais necesitado a traves del link name */
 
 export default function Home(props) {
-  
+  const [displayed, setDislayed] = useState(props.countries)
   // const {setCountry,allCountries,setAllCountries} = useContext(CountryContext)
   const [pageNumber, setPageNumber] = useState(1)
   const perPage = 8
 
   if(props.countries.length >= 8) {
-
     return (
       <>
       <main className={styles.container}>
-        <SearchBar />
+        <SearchBar allCountries={props.countries} setDisplayed={setDislayed} setPageNumber={setPageNumber}/>
         <ul className={styles.countries__grid}>
-        {props.countries.slice(0,pageNumber * perPage).map((country, index) => {
+        {displayed.slice(0,pageNumber * perPage).map((country, index) => {
 
           return <li key={index}><Card country={country} /></li>
         })}
