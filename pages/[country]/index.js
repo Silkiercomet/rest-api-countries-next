@@ -7,17 +7,18 @@ import {AiOutlineArrowLeft} from "react-icons/ai"
 import Loader from "../../components/Loader/Loader";
 
 const Country = (props) => {
- // console.log(props.borderInfo.map(border => border.cca3))
+
   const [country, setCountry] = useState(props.info[0]) 
 
   const router = useRouter()
 
 
     const officialName = country?.name?.official
-    const officialCurrencie = country?.currencies[Object?.keys(country.currencies)[0]]
-    const officialLanguages = Object?.values(country?.languages)
+    const displayedName = officialName[Object.keys(officialName)[0]].official ?? officialName
+    const officialCurrencie = country?.currencies ? country.currencies[Object.keys(country.currencies)[0]] : "no currencie"
+    const officialLanguages = country?.languages?  Object?.values(country?.languages) : "no language"
     const capital = country?.capital === undefined? "none" : country?.capital[0]
-
+    const currencieCheck = officialCurrencie === "no currencie" ? officialCurrencie : `${officialCurrencie.name} ${officialCurrencie.symbol}`
     const handleClick = (e) => {
       router.push(e)
 
@@ -44,16 +45,16 @@ const Country = (props) => {
           <h1 className={styles.details__name}>{country.name.common}</h1>
           <div className={styles.details__container}>
             <ul>
-              <li><span className={styles.bold}>Native Name:</span> {officialName[Object.keys(officialName)[0]].official}</li>
+              <li><span className={styles.bold}>Native Name:</span> {displayedName}</li>
               <li><span className={styles.bold}>Population:</span> {country.population}</li>
               <li><span className={styles.bold}>Region:</span> {country.region}</li>
               <li><span className={styles.bold}>Sub Region:</span> {country.subregion}</li>
               <li><span className={styles.bold}>Capital:</span> {capital}</li>
             </ul>
             <ul>
-              <li><span className={styles.bold}>Top Level Domain:</span> {country.tld[0]}</li>
-              <li><span className={styles.bold}>Currencies:</span> {`${officialCurrencie.name} "${officialCurrencie.symbol}"`}</li>
-              <li><span className={styles.bold}>Languages:</span> {officialLanguages.join(", ")}</li>
+              <li><span className={styles.bold}>Top Level Domain:</span> {country.tld ? country.tld[0] : "no main domain" }</li>
+              <li><span className={styles.bold}>Currencies:</span> {currencieCheck}</li>
+              <li><span className={styles.bold}>Languages:</span> {officialLanguages !== "no language" ? officialLanguages.join(", ") : officialLanguages}</li>
             </ul>
           </div>
           <div className={styles.border__container}>
@@ -77,11 +78,11 @@ const getAllCountries = async (header = "all") => {
 }
 /* encontrar y pasar como prop los nombres de los paises que comparten fronteras */
 export async function getStaticProps(context) {
-
+  
   const data = await getAllCountries()
   const fullName = context.params.country.replaceAll("-", " ")
-  const match = data.filter(e => e.name.common.includes(fullName) === true )
-  const borders = match[0].borders
+  const match = data.filter(e => e.name.common.includes(fullName) === true || e.name.common.includes(context.params.country) )
+  const borders = match[0]?.borders ?? "no border"
   const borderCountryName = await data.filter(e => {
     if(borders?.includes(e.cca3)){
       return {cca3: e.cca3, name : e.name.common}
