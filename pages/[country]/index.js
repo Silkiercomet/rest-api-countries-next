@@ -80,10 +80,10 @@ export async function getStaticProps(context) {
 
   const data = await getAllCountries()
   const fullName = context.params.country.replaceAll("-", " ")
-  const match = await data.filter(e => e.name.common.includes(fullName) === true )
+  const match = data.filter(e => e.name.common.includes(fullName) === true )
   const borders = match[0].borders
   const borderCountryName = await data.filter(e => {
-    if(borders.includes(e.cca3)){
+    if(borders?.includes(e.cca3)){
       return {cca3: e.cca3, name : e.name.common}
     }
   })
