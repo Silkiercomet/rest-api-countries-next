@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import SearchBar from '../components/SearchBar/SearchBar'
 import Card from '../components/Card/Card'

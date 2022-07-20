@@ -80,9 +80,9 @@ export async function getStaticProps(context) {
 
   const data = await getAllCountries()
   const fullName = context.params.country.replaceAll("-", " ")
-  const match = data.filter(e => e.name.common.includes(fullName) === true )
+  const match = await data.filter(e => e.name.common.includes(fullName) === true )
   const borders = match[0].borders
-  const borderCountryName = data.filter(e => {
+  const borderCountryName = await data.filter(e => {
     if(borders.includes(e.cca3)){
       return {cca3: e.cca3, name : e.name.common}
     }
@@ -98,7 +98,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const data = await getAllCountries()
 
-  const countriesNames = data.map( e => ({params: {country: e.name.common.replaceAll(" ","-")}}))
+  const countriesNames = await data.map( e => ({params: {country: e.name.common.replaceAll(" ","-")}}))
   return {
     paths: countriesNames,
     fallback: false // See the "fallback" section below
