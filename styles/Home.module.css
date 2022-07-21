@@ -1,7 +1,13 @@
 .container {
   background-color: var(--VeryLightGray);
   min-height: 100vh;
-  margin-bottom: 20px;
+  padding-bottom: 30px;
+}
+.container__loader {
+  background-color: var(--VeryLightGray);
+  min-height: 100vh;
+  display:grid;
+  place-items:center;
 }
 
 /* grid */
@@ -42,3 +48,37 @@
 
 /* grid */
 
+/* utils */
+.home__btn{
+  display: block;
+  margin: 20px auto;
+  padding: 8px 20px;
+
+  background-color: hsl(145, 58%, 55%);
+  color: white;
+  font-family: inherit;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+
+  transition: 300ms ease-in-out;
+
+}
+.home__btn:hover{
+
+
+  background-color: inherit;
+  color: hsl(145, 58%, 55%);
+  font-family: inherit;
+  text-transform: capitalize;
+  font-weight: 700;
+  border: 1px solid hsl(145, 58%, 55%);
+
+
+}
+/*
+  --Softblue: hsl(195, 74%, 62%);
+  --Lightred: hsl(348, 100%, 68%);
+  --Limegreen: hsl(145, 58%, 55%);
+*/

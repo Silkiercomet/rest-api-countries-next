@@ -4,11 +4,12 @@ import SearchBar from '../components/SearchBar/SearchBar'
 import Card from '../components/Card/Card'
 import Loader from '../components/Loader/Loader'
 
-/*cambiar el contexto por solo usar el props, y filtrar el pais necesitado a traves del link name */
+/* sticky navbar
+   smooth transitions  */
 
 export default function Home(props) {
   const [displayed, setDislayed] = useState(props.countries)
-  // const {setCountry,allCountries,setAllCountries} = useContext(CountryContext)
+
   const [pageNumber, setPageNumber] = useState(1)
   const perPage = 8
 
@@ -16,7 +17,7 @@ export default function Home(props) {
     return (
       <>
       <main className={styles.container}>
-        <SearchBar allCountries={props.countries} setDisplayed={setDislayed} setPageNumber={setPageNumber}/>
+        <SearchBar allCountries={props.countries} setDisplayed={setDislayed} setPageNumber={setPageNumber} displayed={displayed}/>
         <ul className={styles.countries__grid}>
         {displayed.slice(0,pageNumber * perPage).map((country, index) => {
 
@@ -24,14 +25,14 @@ export default function Home(props) {
         })}
         </ul>
   
-        
+        {displayed.length > perPage && (pageNumber * perPage) < displayed.length && <button className={styles.home__btn} onClick={() => setPageNumber(pageNumber + 1)}>load more</button>}
       </main>
-      <button onClick={() => setPageNumber(pageNumber + 1)}>load more</button>
+      
       </>
     )
   }
 
-  return <main className={styles.container}><Loader /></main>
+  return <main className={styles.container__loader}><Loader /></main>
 }
 
 

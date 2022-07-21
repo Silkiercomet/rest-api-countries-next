@@ -1,5 +1,7 @@
 .country__container{
     padding: 2rem 2.5rem;
+    background-color: var(--VeryLightGray);
+    min-height: calc(100vh - 50px);
 }
 .country__btn{
     display: flex;
@@ -12,7 +14,7 @@
     font-family: inherit;
     font-weight: 600;
     
-    color:inherit;
+
     box-shadow: 0 0 1em rgba(0, 0, 0, .2 );
     border-radius: 3px;
 }
@@ -32,6 +34,7 @@
 }
 .bold{
     font-weight: 800;
+    color: var(--strong-header);
 }
 
 .country__content{
@@ -39,6 +42,10 @@
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 2.5rem;
+
+}
+.cursor{
+    cursor: pointer;
 }
 .imgFlag{
     width: 100%;
@@ -70,16 +77,20 @@
     row-gap: .4rem;
 }
 .border__container{
-    margin-top: 16px;
+    margin: 16px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 .borders__container{
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     margin-left: 5px;
 
 }
 .borders__container > *{
 
-    background-color: white;
     margin: 0 5px;
     cursor: pointer;
     
@@ -93,10 +104,9 @@
     font-family: inherit;
     font-weight: 600;
 
-    color:inherit;
     box-shadow: 0 0 1em rgba(0, 0, 0, .3 );
     border-radius: 3px;
-    cursor: pointer;
+
 }
 @media screen and (max-width:650px) {
     .country__content{

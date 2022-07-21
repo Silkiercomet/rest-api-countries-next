@@ -1,16 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "../../styles/searchbar.module.css";
 import { BsSearch } from "react-icons/bs";
-const SearchBar = ({ allCountries, setDisplayed, setPageNumber }) => {
+const SearchBar = ({ allCountries, setDisplayed, setPageNumber, displayed }) => {
   const [input, setInput] = useState("");
-  const [render, setRender] = useState(false);
+  const [renderSelect, setRenderSelect] = useState(false);
+  const [region, setRegion] = useState(allCountries);
   const selectRef = useRef("Filter by region");
 
   const filterByRegions = (region) => {
     switch (region) {
-      case "Filter by region":
-        return allCountries;
-
       case "Africa":
         return allCountries.filter((country) => country.region === "Africa");
 
@@ -31,20 +29,26 @@ const SearchBar = ({ allCountries, setDisplayed, setPageNumber }) => {
     }
   };
   useEffect(() => {
+    setPageNumber(1);
     if (input !== "") {
-      let count = allCountries.filter((c) =>
+      let count = region.filter((c) =>
         c.name.common
           .toLowerCase()
           .slice(0, input.length)
           .includes(input.toLocaleLowerCase())
       );
       setPageNumber(1);
-      console.log(count);
       return setDisplayed(count);
     }
+    setDisplayed(region)
+  }, [input]);
+
+  useEffect(() => {
     setPageNumber(1);
-    setDisplayed(filterByRegions(selectRef.current.value));
-  }, [input, render]);
+    const regions = filterByRegions(selectRef.current.value)
+    setDisplayed(regions);
+    setRegion(regions)
+  }, [renderSelect]);
   const filterOptions = [
     "Filter by region",
     "Africa",
@@ -55,24 +59,23 @@ const SearchBar = ({ allCountries, setDisplayed, setPageNumber }) => {
   ];
   return (
     <menu className={styles.menu}>
-      <li className={`light-bg-element ${styles.menu__input}`}>
-        <BsSearch />
+      <li className={`theme__bg ${styles.menu__input}`}>
+        <i className="strong__header"><BsSearch /></i>
         <input
           type="text"
           value={input}
-          className={"light-bg-element light"}
+          className={"theme__bg strong__header"}
           placeholder="Search for a country"
           onChange={(e) => setInput(e.target.value)}
         />
       </li>
-      <li className={`light-bg-element ${styles.menu__select}`}>
+      <li className={`theme__bg ${styles.menu__select}`}>
         <select
           name="Filter by Region"
           ref={selectRef}
-          className={"light-bg-element light"}
+          className={"theme__bg strong__header"}
           onChange={(e) => {
-            setDisplay(regions[e.target.value]?.());
-            setRender(!render);
+            setRenderSelect(!renderSelect);
           }}
         >
           {filterOptions.map((opt, index) => (

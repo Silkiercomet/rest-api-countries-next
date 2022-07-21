@@ -28,3 +28,11 @@
     cursor: pointer;
     
 }
+.toggleTheme__icon{
+    margin-right: 5px;
+}
+.toggleTheme_internal{
+    display: flex;
+    align-items: center;
+    
+}

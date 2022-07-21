@@ -1,11 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+/*
+light theme
+dark theme
+
+navbar: bg: white > h1, button: color:veryDarkBlue
+navbar: bg: DarkBlue > h1, button: color:white
+
+serachbar > input, select: bg:white color DarkGray
+serachbar > input, select: bg:DarkBlue color white
+
+main bg: VeryLightGray
+main bg: VeryDarkBlue
+
+card bg:white, color h2:VeryDarkBlue li: color:DarkGray
+card bg:DarkBlue, color h2:white li:white span:darkgray
+
+btn: bg green : color white
+btn: bg red : color white
+*/
 :root{
 --DarkBlue : hsl(209, 23%, 22%);
 --VeryDarkBlue : hsl(207, 26%, 17%);
---VeryDarkBlue : hsl(200, 15%, 8%);
+--VeryDarkBlack : hsl(200, 15%, 8%);
 --DarkGray : hsl(0, 0%, 52%);
 --VeryLightGray : hsl(0, 0%, 98%);
 --White : hsl(0, 0%, 100%);
+/*bg*/
+--White : hsl(0, 0%, 100%);
+--DarkBlue : hsl(209, 23%, 22%);
+
+--bg: hsl(0, 0%, 100%);
+/*strong header*/
+--VeryDarkBlue : hsl(207, 26%, 17%);
+--White : hsl(0, 0%, 100%);
+
+--strong-header :  hsl(207, 26%, 17%);
+
+/*card component ul*/
+--White : hsl(0, 0%, 100%);
+--DarkGray : hsl(0, 0%, 52%);
+
+--card-li: hsl(0, 0%, 52%);
+
 }
 html{
   box-sizing: border-box;
@@ -14,9 +50,17 @@ html{
   box-sizing: inherit;
   padding: 0;
   margin: 0;
+  transition: 300ms ease-in-out;
 }
 body{
   font-family: 'Nunito Sans', sans-serif;
+}
+/* themes */
+.theme__bg{
+  background-color: var(--bg);
+}
+.strong__header{
+  color: var(--strong-header);
 }
 
 .light{
@@ -27,7 +71,15 @@ body{
   height: 100%;
   min-height: 100vh;
 }
+
 .light-bg-element{
   background-color: var(--White);
 
+}
+ul > li {
+  color:  var(--strong-header);
+}
+li > span{
+  color: var(--DarkGray);
+  padding-left: 3px;
 }

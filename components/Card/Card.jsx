@@ -14,16 +14,16 @@ const Card = ({country}) => {
         pathname: '/[country]',
         query: { country: country?.name.common.replaceAll(" ","-") },
       }}>
-        <div className={`light-bg-element ${styles.card}`}>
+        <div className={`theme__bg ${styles.card}`}>
           <figure className={styles.flag}>
               <img src={country.flags.svg} alt={country.name.common} className={styles.flag__image}/>
           </figure>
           <article className={styles.content__card}>
-          <h2>{countryName}</h2>
+          <h2 className="strong__header">{countryName}</h2>
           <ul>
-              <li>Population: {country.population}</li>
-              <li>Region: {country.region}</li>
-              <li>Capital: {capital}</li>
+              <li>Population:<span>{country.population}</span></li>
+              <li>Region:<span>{country.region}</span></li>
+              <li>Capital:<span>{capital}</span></li>
           </ul>
           </article>
         </div>
